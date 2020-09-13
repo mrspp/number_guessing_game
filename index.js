@@ -29,14 +29,6 @@ function compareNumber(inputValue, hiddenNumber) {
   return false;
 }
 
-function checkInp() {
-  var x = document.forms["myForm"]["age"].value;
-  if (isNaN(x)) {
-    alert("Must input numbers");
-    return false;
-  }
-}
-
 function restart(remaining) {
   if (remaining === 0) location.reload(true);
   document.getElementById("reload").innerHTML = `Try again after ${remaining}s`;
@@ -45,5 +37,5 @@ function restart(remaining) {
   }, 1000);
 }
 function back() {
-  location.replace("index.html");
+  location.replace("../index.html");
 }

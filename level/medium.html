@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy level</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="d-flex justify-content-center d-inline p-2 bg-primary text-white">Number Guessing Game</h1>
+        <a class="d-flex justify-content-center" href="#" id="medium-level"><img src="../image/medium.png"
+                alt="Easy"></a><br><br>
+        <p class="d-flex justify-content-center" id="msg"></p>
+        <div class="d-flex justify-content-center">
+            <input type="text" id="number">
+            <button id="guessBtn" onclick="guessHandler()">Guess</button>
+        </div>
+        <p class="d-flex justify-content-center" id="past-guess"></p>
+        <div class="d-flex justify-content-center">
+            <button id="restart" onclick="restart(3)">Try again</button>
+            <button id="back" onclick="back()">Back</button>
+        </div>
+        <h3 class="d-flex justify-content-center" id="reload"></h3>
+    </div>
+
+    <script src="../index.js"></script>
+    <script>
+        var inputNums = [];
+        const limit = 10;
+        document.getElementById("number").addEventListener("keyup", function (event) {
+            if (event.keyCode === 13) {
+                document.getElementById("guessBtn").click();
+            }
+        });
+        function guessHandler() {
+            let inputNumber = getInputValue("number")
+            let result = compareNumber(getInputValue("number"), window.hiddenNumber);
+            if (isNaN(inputNumber)) {
+                inputNums = inputNums;
+                document.getElementById("msg").innerHTML = `<h4 class="text-warning">Please enter a number!!!</h4>`
+                document.getElementById("number").value = ""
+            }
+            else {
+                inputNums.push(inputNumber);
+                document.getElementById("number").value = ""
+            }
+            if (inputNums.length <= limit) {
+                switch (result) {
+                    case "equal":
+                        document.getElementById("msg").innerHTML = `<br><h4 class="text-success">You won in ${inputNums.length} times</h4>`
+                        //console.log("equal")
+                        restart(5);
+                        break;
+                    case "greater":
+                        document.getElementById("msg").innerHTML = `<br><h4 class="text-warning">Too high. Guess lower. You have ${limit - inputNums.length} changes left</h4>`
+                        //console.log("greater")
+                        break;
+                    case "less":
+                        document.getElementById("msg").innerHTML = `<br><h4 class="text-warning">Too low. Guess higher. You have ${limit - inputNums.length} changes left</h4>`
+                        //console.log("less")
+                        break;
+                }
+            }
+            if (inputNums.length === limit) {
+                document.getElementById("msg").innerHTML = `<br><h4 class="text-danger">Sorry! Your answer is incorrect. Try again?<br><br>The hidden number is ${window.hiddenNumber}</h4>`
+                restart(5);
+            }
+
+            function pastGuess() {
+                document.getElementById("show-past-guess").innerHTML = `<br><h4 class="text-info">You've guessed ${inputNums.length} times: ${inputNums}</h4>`;
+            }
+            document.getElementById("past-guess").innerHTML = `<br><h4 class="text-info">You guessed ${inputNums.length} times: ${inputNums}</h4>`
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            return window.hiddenNumber = randomNumberGenerator(100)
+        })
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
