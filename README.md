@@ -1,2 +1,3 @@
 # number_guessing_game
-https://imgur.com/a/hEZrMUV
+
+![Alt Text](https://imgur.com/a/hEZrMUV)
