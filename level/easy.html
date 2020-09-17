@@ -66,7 +66,7 @@
                         break;
                 }
             }
-            if (inputNums.length === limit) {
+            if (inputNums.length > limit) {
                 document.getElementById("msg").innerHTML = `<br><h4 class="text-danger">Sorry! Your answer is incorrect. Try again?<br><br>The hidden number is ${window.hiddenNumber}</h4>`
                 restart(5);
             }
