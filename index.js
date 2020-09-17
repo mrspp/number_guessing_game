@@ -37,5 +37,5 @@ function restart(remaining) {
   }, 1000);
 }
 function back() {
-  location.replace("/");
+  location.replace("../index.html");
 }
